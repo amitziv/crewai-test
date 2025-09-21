@@ -1,22 +1,23 @@
 [project]
-name = "meeting_assistant_flow"
+name = "game-builder-crew"
 version = "0.1.0"
-description = "meeting_assistant_flow using crewAI"
-authors = [
-    { name = "Your Name", email = "you@example.com" },
-]
-requires-python = ">=3.10,<=3.13"
+description = ""
+requires-python = ">=3.10,<3.12"
 dependencies = [
-    "crewai[tools]>=0.152.0",
-    "slack-sdk>=3.33.1",
+    "crewai>=0.152.0",
+    "python-dotenv==1.0.0",
 ]
+
+[tool.pyright]
+# https://github.com/microsoft/pyright/blob/main/docs/configuration.md
+useLibraryCodeForTypes = true
+exclude = [".cache"]
+
+[tool.ruff]
+# https://beta.ruff.rs/docs/configuration/
+select = ['E', 'W', 'F', 'I', 'B', 'C4', 'ARG', 'SIM']
+ignore = ['W291', 'W292', 'W293']
 
 [project.scripts]
-kickoff = "meeting_assistant_flow.main:kickoff"
-plot = "meeting_assistant_flow.main:plot"
-
-[build-system]
-requires = [
-    "hatchling",
-]
-build-backend = "hatchling.build"
+game_builder_crew = "game_builder_crew.main:run"
+train = "game_builder_crew.main:train"
