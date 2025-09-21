@@ -1,26 +1,18 @@
 import sys
 import yaml
-from game_builder_crew.crew import GameBuilderCrew
+from game_builder_crew.crew import SchedulingCrew
 
 
 def run():
-    # Replace with your inputs, it will automatically interpolate any tasks and agents information
-    print("## Welcome to the Game Crew")
-    print('-------------------------------')
-
-    with open('src/game_builder_crew/config/gamedesign.yaml', 'r', encoding='utf-8') as file:
-        examples = yaml.safe_load(file)
-
-    inputs = {
-        'game' :  examples['example3_snake']
-    }
-    game= GameBuilderCrew().crew().kickoff(inputs=inputs)
+    output = SchedulingCrew().crew().kickoff({
+        'requirements': 'I need to schedule a meeting with John Doe on Monday at 10:00'
+    })
 
     print("\n\n########################")
     print("## Here is the result")
     print("########################\n")
-    print("final code for the game:")
-    print(game)
+    print("final schedule:")
+    print(output)
     
 
 def train():

@@ -1,70 +1,38 @@
+from .services import Calendar, Messaging
 from typing import List
 from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task
 from crewai.tools import tool
 
 
-@tool
-def submit_game_to_competition(game_description: str) -> str:
-    return "Game submitted to competition successfully"
-
 @CrewBase
-class GameBuilderCrew:
-    """GameBuilder crew"""
+class SchedulingCrew:
+    """Scheduling crew"""
     agents_config = 'config/agents.yaml'
     tasks_config = 'config/tasks.yaml'
 
     @agent
-    def senior_engineer_agent(self) -> Agent:
+    def scheduling_agent(self) -> Agent:
         return Agent(
-            config=self.agents_config['senior_engineer_agent'],
+            config=self.agents_config['scheduling_agent'],
             allow_delegation=False,
-            verbose=True
-        )
-    
-    @agent
-    def qa_engineer_agent(self) -> Agent:
-        return Agent(
-            config=self.agents_config['qa_engineer_agent'],
-            allow_delegation=False,
-            verbose=True
-        )
-    
-    @agent
-    def chief_qa_engineer_agent(self) -> Agent:
-        return Agent(
-            config=self.agents_config['chief_qa_engineer_agent'],
-            allow_delegation=True,
             verbose=True,
-            tools=[submit_game_to_competition]
-        )
-    
-
-    @task
-    def code_task(self) -> Task:
-        return Task(
-            config=self.tasks_config['code_task'],
-            agent=self.senior_engineer_agent()
+            tools=[Calendar.get_tomorrow_appointments, Calendar.get_all_appointments,
+            Calendar.get_open_meeting_slots, Calendar.set_meeting, Messaging.send_message]
         )
 
-    @task
-    def review_task(self) -> Task:
-        return Task(
-            config=self.tasks_config['review_task'],
-            agent=self.qa_engineer_agent(),
-            #### output_json=ResearchRoleRequirements
-        )
 
     @task
-    def evaluate_task(self) -> Task:
+    def schedule_task(self) -> Task:
         return Task(
-            config=self.tasks_config['evaluate_task'],
-            agent=self.chief_qa_engineer_agent()
+            config=self.tasks_config['schedule_task'],
+            agent=self.scheduling_agent()
         )
+
 
     @crew
     def crew(self) -> Crew:
-        """Creates the GameBuilderCrew"""
+        """Creates the SchedulingCrew"""
         return Crew(
             agents=self.agents,  # Automatically created by the @agent decorator
             tasks=self.tasks,  # Automatically created by the @task decorator

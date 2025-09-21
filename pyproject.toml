@@ -1,5 +1,5 @@
 [project]
-name = "game-builder-crew"
+name = "meeting-scheduling-crew"
 version = "0.1.0"
 description = ""
 requires-python = ">=3.10,<3.12"
