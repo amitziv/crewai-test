@@ -1,6 +1,12 @@
 from typing import List
 from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task
+from crewai.tools import tool
+
+
+@tool
+def submit_game_to_competition(game_description: str) -> str:
+    return "Game submitted to competition successfully"
 
 @CrewBase
 class GameBuilderCrew:
@@ -29,7 +35,8 @@ class GameBuilderCrew:
         return Agent(
             config=self.agents_config['chief_qa_engineer_agent'],
             allow_delegation=True,
-            verbose=True
+            verbose=True,
+            tools=[submit_game_to_competition]
         )
     
 
