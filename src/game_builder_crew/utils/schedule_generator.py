@@ -6,7 +6,7 @@ Generates realistic schedules with varying availability between date ranges.
 import random
 import datetime
 from typing import List, Dict
-from ..shared.models import Appointment, ScheduleConfig, APPOINTMENTS_BY_DATE
+from game_builder_crew.shared.models import Appointment, ScheduleConfig, APPOINTMENTS_BY_DATE
 
 
 class RandomScheduleGenerator:

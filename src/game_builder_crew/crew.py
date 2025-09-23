@@ -1,4 +1,4 @@
-from .services import Calendar, Messaging
+from game_builder_crew.services import Calendar, Messaging
 from typing import List
 from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task

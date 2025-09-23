@@ -1,7 +1,7 @@
 import datetime
 from crewai.tools import tool
-from ..shared.models import Appointment, APPOINTMENTS_BY_DATE
-from ..utils.schedule_generator import create_very_busy_schedule_config, generate_random_schedule, create_busy_schedule_config
+from game_builder_crew.shared.models import Appointment, APPOINTMENTS_BY_DATE
+from game_builder_crew.utils.schedule_generator import create_very_busy_schedule_config, generate_random_schedule, create_busy_schedule_config
 
 
 def generate_calendar_data():
