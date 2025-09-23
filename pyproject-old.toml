@@ -1,0 +1,33 @@
+[tool.poetry]
+name = "game-builder-crew"
+version = "0.1.0"
+description = ""
+authors = ["Your Name <your.email@example.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.10,<3.12"
+crewai = ">=0.193.0"
+python-dotenv = "1.0.0"
+
+[tool.poetry.group.dev.dependencies]
+
+[tool.pyright]
+# https://github.com/microsoft/pyright/blob/main/docs/configuration.md
+useLibraryCodeForTypes = true
+exclude = [".cache"]
+
+[tool.ruff]
+# https://beta.ruff.rs/docs/configuration/
+select = ['E', 'W', 'F', 'I', 'B', 'C4', 'ARG', 'SIM']
+ignore = ['W291', 'W292', 'W293']
+
+[tool.poetry.scripts]
+run_crew = "game_builder_crew.main:run"
+train = "game_builder_crew.main:train"
+plot = "game_builder_crew.main:plot"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
